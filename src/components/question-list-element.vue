@@ -2,7 +2,7 @@
   <div>
     <h3>{{ question.title }}</h3>
 
-    <answer-list :answers="question.answers" v-on:selectAnswer="onSelectAnswer"></answer-list>
+    <answer-list :answers="question.answers" :selectedAnswer="question.userAnswer" v-on:selectAnswer="onSelectAnswer"></answer-list>
   </div>
 </template>
 
