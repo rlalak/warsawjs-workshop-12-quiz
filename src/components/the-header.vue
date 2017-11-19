@@ -15,6 +15,8 @@
 
 <style scoped>
   h1 {
-    background-color: red;
+    background-color: silver;
+    font-size: 28px;
+    text-align: center;
   }
 </style>
