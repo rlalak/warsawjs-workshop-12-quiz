@@ -2,7 +2,7 @@
   <div>
     <h3>{{ question.title }}</h3>
 
-    <answer-list :answers="question.answers"></answer-list>
+    <answer-list :answers="question.answers" v-on:selectAnswer="onSelectAnswer"></answer-list>
   </div>
 </template>
 
@@ -15,6 +15,11 @@
     },
     components: {
       AnswerList
+    },
+    methods: {
+      onSelectAnswer(index, answer) {
+        this.$store.dispatch('saveAnswer', {questionTitle: this.question.title, answerIndex: index});
+      }
     }
   }
 </script>

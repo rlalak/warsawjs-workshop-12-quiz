@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li v-for="answer in answers">
-      <answer-list-element :answer="answer"></answer-list-element>
+    <li v-for="(answer, index) in answers" :key="answer">
+      <answer-list-element :answer="answer"  v-on:selectAnswer="onSelectAnswer(index)"></answer-list-element>
     </li>
   </ul>
 </template>
@@ -15,6 +15,11 @@
     },
     components: {
       AnswerListElement
+    },
+    methods: {
+      onSelectAnswer: function(index) {
+        this.$emit('selectAnswer', index, this.answers[index]);
+      }
     }
   }
 </script>

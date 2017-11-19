@@ -4,6 +4,8 @@
 
     <quiz-details :quiz="quizJson"></quiz-details>
 
+    <div>Liczba poprawnych odpowiedzi {{ correctAnswers() }}</div>
+
     <router-view/>
   </div>
 </template>
@@ -17,17 +19,27 @@
     components: {
       TheHeader, QuizDetails
     },
-    data() {
-      return {
-        quizJson: null
+    computed: {
+      quizJson: function() {
+        return this.$store.getters.quiz;
+      }
+    },
+    methods: {
+      correctAnswers: function() {
+        let correctAnswers = 0;
+        let quetions = this.$store.getters.quiz.questions;
+        console.log('correctAnswers', quetions);
+        for (let index in quetions) {//console.log(quetions[index].userAnswer , quetions[index].correctAnswerIndex);
+          if (quetions[index].userAnswer === quetions[index].correctAnswerIndex) {
+            correctAnswers++;
+          }
+        }
+
+        return correctAnswers;
       }
     },
     mounted() {
-      fetch('/static/quiz.json')
-        .then((res) => res.json())
-        .then((quiz) => {
-          this.quizJson = quiz;
-        })
+      this.$store.dispatch('init');
     }
   }
 </script>
